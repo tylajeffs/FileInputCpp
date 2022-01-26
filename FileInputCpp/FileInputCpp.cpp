@@ -40,7 +40,7 @@ int main(int argc, char** argv)
 
 
 
-  //hi
+ 
 
 
 
@@ -74,15 +74,42 @@ int main(int argc, char** argv)
 
     }
 
+
+
+
+    //Find the queries
+    string temp;
+
+    getline(ifs, temp);
+    int numQue = stoi(temp);
+
+
+    //create list of queries
+    int queries[numQue];
+
+    //loop through lines of queries
+    for (int i = 0; i < numQue; i++)
+    {
+        string temp1;
+        getline(ifs, temp1);
+
+        //store in the array of queries
+        queries[i] = stoi(temp1);
+    }
+
+
+
     //close the scanner thingy
     ifs.close();
 
 
 
-    //loop through all employees and print their info
-    for (int i = 0; i < numRecords; i++)
+    //loop through all queries and print all employee info for those queries
+    for (int i = 0; i < numQue; i++)
     {
-        employees[i]->printInfo();
+        employees[queries[i]]->printInfo();
     }
+
+
 
 }

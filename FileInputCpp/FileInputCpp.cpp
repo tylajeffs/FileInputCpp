@@ -85,7 +85,7 @@ int main(int argc, char** argv)
 
 
     //create list of queries
-    int queries[numQue];
+    int* querie[numQue];
 
     //loop through lines of queries
     for (int i = 0; i < numQue; i++)

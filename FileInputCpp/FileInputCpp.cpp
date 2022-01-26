@@ -61,7 +61,7 @@ int main(int argc, char** argv)
         getline(ifs, empI, '|');
         getline(ifs, empA, '|');
         getline(ifs, empJob, '|');
-        getline(ifs, empY, '|');
+        getline(ifs, empY);
 
         //convert to int
         empID = stoi(empI);
@@ -84,4 +84,5 @@ int main(int argc, char** argv)
     {
         employees[i]->printInfo();
     }
+
 }

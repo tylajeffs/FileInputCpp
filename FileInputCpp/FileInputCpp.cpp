@@ -91,7 +91,7 @@ int main(int argc, char** argv)
         getline(ifs, temp1);
 
         //store in the array of queries
-        queries[i] = stoi(temp1);
+        queries.push_back(stoi(temp1));
     }
 
 

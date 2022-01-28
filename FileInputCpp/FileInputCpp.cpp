@@ -14,9 +14,6 @@ using namespace std;
 int main(int argc, char** argv)
 {
 
-
-
-
     //get the file from the command line
     string filename = argv[1];//"C:/users/config/Desktop/pokemon.txt";
     ifstream ifs;
@@ -85,7 +82,7 @@ int main(int argc, char** argv)
 
 
     //create list of queries
-    int* querie[numQue];
+    vector<int> queries;
 
     //loop through lines of queries
     for (int i = 0; i < numQue; i++)

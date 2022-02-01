@@ -10,6 +10,9 @@
 using namespace std;
 
 
+//global variables
+Employee** employees;
+
 
 int main(int argc, char** argv)
 {
@@ -44,7 +47,7 @@ int main(int argc, char** argv)
 
 
     //create list of employees using the size we read
-    Employee** employees = new Employee * [numRecords];
+    employees = new Employee * [numRecords];
 
     //loop through all the lines in the file
     for (int i = 0; i < numRecords; i++)
@@ -104,9 +107,43 @@ int main(int argc, char** argv)
     //loop through all queries and print all employee info for those queries
     for (int i = 0; i < numQue; i++)
     {
-        employees[queries[i]]->printInfo();
+        int indexOfEmp = binarySearch(queries[i]);
+
+        //print the info
+        cout << "FOUND: " << employees[indexofEmp]->printInfo();
     }
 
 
+
+}
+
+
+int binarySearch(int idToFind)
+{
+    //variables
+    double average;
+    int low = 0;
+    int high = sizeof(employees); 
+    int mid;
+
+    while (low < high)
+    {
+        //divide the array in half
+        mid = floor((low + high) / 2);
+
+        //figure out which half the id is in
+        if (idToFind <= employees[mid]->id)
+        {
+            high = mid;
+        }
+        else
+        {
+            low = mid + 1;
+        }
+    }
+
+
+    //return the index of the employee with the given id number
+    return high;
 
 }

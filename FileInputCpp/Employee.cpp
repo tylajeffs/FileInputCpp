@@ -15,10 +15,10 @@ Employee::Employee(string n, int i, int a, string j, int y)
 //to print
 void Employee::printInfo()
 {
-	cout << "Name:         " << name << endl;
-	cout << "ID:           " << id << endl;
-	cout << "Age:          " << age << endl;
-	cout << "Hire Year:    " << year << endl;
-	cout << "************************************" << endl;
+	cout << "Name: " << name << ", ";
+	cout << "ID: " << id << ", ";
+	cout << "Age: " << age << ", ";
+	cout << "Hired: " << year << endl;
+
 
 }

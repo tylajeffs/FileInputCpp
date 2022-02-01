@@ -105,6 +105,9 @@ int main(int argc, char** argv)
     for (int i = 0; i < numQue; i++)
     {
         employees[queries[i]]->printInfo();
+
+        //print where it was found and how many comparisons
+        cout << "at index " << queries[i] << "after " << << "comparisons.";
     }
 
 

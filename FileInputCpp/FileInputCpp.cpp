@@ -104,6 +104,8 @@ int main(int argc, char** argv)
     //loop through all queries and print all employee info for those queries
     for (int i = 0; i < numQue; i++)
     {
+        cout << "FOUND: ";
+
         employees[queries[i]]->printInfo();
 
         //print where it was found and how many comparisons

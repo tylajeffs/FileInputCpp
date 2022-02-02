@@ -114,5 +114,34 @@ int main(int argc, char** argv)
     }
 
 
+    //TEST TEST
+
+
+    //loop through all queries and print all employee info for those queries
+    for (int i = 0; i < numQue; i++)
+    {
+        //index variable
+        int index;
+
+        //loop through employees
+        for (int j = 0; j < numRecords; j++)
+        {
+            if (queries[i] == employees[j].id)
+            {
+                index = j;
+                break;
+            }
+        }
+
+        cout << "FOUND: ";
+
+        employees[queries[i]]->printInfo();
+
+        //print where it was found and how many comparisons
+        cout << "at index " << queries[i] << " after " << queries[i] + 1 << " comparisons." << endl;
+        cout << endl;
+
+    }
+
 
 }

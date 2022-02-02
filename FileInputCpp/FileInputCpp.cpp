@@ -85,7 +85,6 @@ int main(int argc, char** argv)
     }
 
 
-
     //close the scanner thingy
     ifs.close();
 
@@ -93,6 +92,20 @@ int main(int argc, char** argv)
     //perform the bubble sort algorithm
     bubbleSort();
 
+
+    //write out the sorted array to an external file
+    ofstream ofs;
+    ofs.open("C:/users/config/desktop/bubbleSorted.txt", ios::out);
+    
+    for (int i = 0; i < numRecords; i++)
+    {
+        //make a method to return a string 
+        ofs << employees[i]->printInfo() << endl;
+
+    }
+    
+    //close it
+    ofs.close();
 
 }
 
@@ -187,5 +200,8 @@ void bubbleSort()
         }
 
     }
+
+    //print number of comparisons
+    cout << "it took " << comparisons << " comparisons to sort this list" << endl;
 
 }

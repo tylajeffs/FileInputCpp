@@ -22,3 +22,9 @@ void Employee::printInfo()
 
 
 }
+
+
+string Employee::writeInfo()
+{
+
+}

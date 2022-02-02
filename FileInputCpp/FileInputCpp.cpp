@@ -109,7 +109,8 @@ int main(int argc, char** argv)
         employees[queries[i]]->printInfo();
 
         //print where it was found and how many comparisons
-        cout << "at index " << queries[i] << "after " << << "comparisons.";
+        cout << "at index " << queries[i] << " after " << queries[i] + 1 << " comparisons." << endl;
+        cout << endl;
     }
 
 

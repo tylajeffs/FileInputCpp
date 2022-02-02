@@ -13,6 +13,7 @@ using namespace std;
 //global variables
 Employee** employees;
 
+int binarySearch(int idToFind);
 
 int main(int argc, char** argv)
 {
@@ -110,7 +111,9 @@ int main(int argc, char** argv)
         int indexOfEmp = binarySearch(queries[i]);
 
         //print the info
-        cout << "FOUND: " << employees[indexofEmp]->printInfo();
+        cout << "FOUND: ";
+        
+        employees[indexOfEmp]->printInfo();
     }
 
 

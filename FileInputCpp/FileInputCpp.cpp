@@ -13,8 +13,16 @@ using namespace std;
 //global variables
 Employee** employees;
 int comparisons;
+int numRecords;
+
+
+
+
+
 
 int binarySearch(int idToFind, int numRecords);
+
+void bubbleSort();
 
 int main(int argc, char** argv)
 {
@@ -38,7 +46,7 @@ int main(int argc, char** argv)
     getline(ifs, firstline);
 
     //convert to int
-    int numRecords = stoi(firstline);
+    numRecords = stoi(firstline);
 
 
 
@@ -78,57 +86,20 @@ int main(int argc, char** argv)
 
 
 
-
-    //Find the queries
-    string temp;
-
-    getline(ifs, temp);
-    int numQue = stoi(temp);
-
-
-    //create list of queries
-    vector<int> queries;
-
-    //loop through lines of queries
-    for (int i = 0; i < numQue; i++)
-    {
-        string temp1;
-        getline(ifs, temp1);
-
-        //store in the array of queries
-        queries.push_back(stoi(temp1));
-    }
-
-
-
     //close the scanner thingy
     ifs.close();
 
 
-
-    //loop through all queries and print all employee info for those queries
-    for (int i = 0; i < numQue; i++)
-    {
-        //get the index of the employee using binary search
-        int indexOfEmp = binarySearch(queries[i],numRecords);
-
-        //print the info
-        cout << "FOUND: ";
-        
-        employees[indexOfEmp]->printInfo();
-
-        //print index and comparisons
-        cout << "at index " << indexOfEmp << " after " << comparisons << " comparisons" << endl;
-
-        //for formatting
-        cout << endl;
-    }
-
+    //perform the bubble sort algorithm
+    bubbleSort();
 
 
 }
 
 
+
+
+//binary search algorithm
 int binarySearch(int idToFind, int numRecords)
 {
     //variables
@@ -165,5 +136,56 @@ int binarySearch(int idToFind, int numRecords)
 
     //return the index of the employee with the given id number
     return high;
+
+}
+
+
+
+
+
+
+//bubble sort algorithm
+void bubbleSort()
+{
+    //set comparisons to 0
+    comparisons = 0;
+
+
+
+    //sort the array
+    for (int i = 0; i < numRecords - 1; i++)
+    {
+        for (int j = numRecords - 1; j >= i+1; j--)
+        {
+            //increase comparisons
+            comparisons++;
+
+
+            //check the values at indexes
+            if (employees[j]->id < employees[j - 1]->id)
+            {
+                //store one employee in a temporary variable
+                Employee* temp = employees[j];
+
+                //switch the employees
+                employees[j] = employees[j - 1];
+                employees[j-1] = temp;
+
+
+                //for small values!! print out the whole list of id #s
+                for (int k = 0; k < numRecords; k++)
+                {
+                    //print the id # of the employee
+                    cout << employees[k]->id;
+                }
+
+                //print a new line
+                cout << endl;
+
+            }
+
+        }
+
+    }
 
 }

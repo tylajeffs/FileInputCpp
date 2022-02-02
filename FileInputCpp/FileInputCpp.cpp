@@ -12,8 +12,9 @@ using namespace std;
 
 //global variables
 Employee** employees;
+int comparisons;
 
-int binarySearch(int idToFind);
+int binarySearch(int idToFind, int numRecords);
 
 int main(int argc, char** argv)
 {
@@ -108,12 +109,19 @@ int main(int argc, char** argv)
     //loop through all queries and print all employee info for those queries
     for (int i = 0; i < numQue; i++)
     {
-        int indexOfEmp = binarySearch(queries[i]);
+        //get the index of the employee using binary search
+        int indexOfEmp = binarySearch(queries[i],numRecords);
 
         //print the info
         cout << "FOUND: ";
         
         employees[indexOfEmp]->printInfo();
+
+        //print index and comparisons
+        cout << "at index " << indexOfEmp << " after " << comparisons << " comparisons" << endl;
+
+        //for formatting
+        cout << endl;
     }
 
 
@@ -121,18 +129,24 @@ int main(int argc, char** argv)
 }
 
 
-int binarySearch(int idToFind)
+int binarySearch(int idToFind, int numRecords)
 {
     //variables
     double average;
     int low = 0;
-    int high = sizeof(employees); 
+    int high = numRecords; 
     int mid;
+
+    //set comparisons to 0
+    comparisons = 0;
+    
+
 
     while (low < high)
     {
         //divide the array in half
         mid = floor((low + high) / 2);
+
 
         //figure out which half the id is in
         if (idToFind <= employees[mid]->id)
@@ -143,6 +157,9 @@ int binarySearch(int idToFind)
         {
             low = mid + 1;
         }
+
+        //increase comparisons
+        comparisons += 1;
     }
 
 

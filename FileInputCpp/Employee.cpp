@@ -26,5 +26,5 @@ void Employee::printInfo()
 
 string Employee::writeInfo()
 {
-
+	return name + "|" + id + "|" + age + "|" + year;
 }

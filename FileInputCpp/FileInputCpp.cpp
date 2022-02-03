@@ -100,7 +100,7 @@ int main(int argc, char** argv)
     for (int i = 0; i < numRecords; i++)
     {
         //make a method to return a string 
-        ofs << employees[i]->printInfo() << endl;
+        ofs << employees[i]->writeInfo() << endl;
 
     }
     

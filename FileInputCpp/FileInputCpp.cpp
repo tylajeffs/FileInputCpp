@@ -106,7 +106,7 @@ int main(int argc, char** argv)
 
     //TEST TEST
 
-
+    int total = 0;
    
      //loop through all queries and print all employee info for those queries
     for (int i = 0; i < numQue; i++)
@@ -132,6 +132,12 @@ int main(int argc, char** argv)
         cout << "at index " << index << " after " << index + 1 << " comparisons." << endl;
         cout << endl;
 
+        total += (index + 1);
+
     }
+
+
+    //print done
+    cout << "DONE! Average number of comparisons: " << (total/numQue);
 
 }

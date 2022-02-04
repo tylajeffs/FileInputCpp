@@ -185,6 +185,9 @@ void bubbleSort()
                 employees[j-1] = temp;
 
 
+
+
+
                 //for small values!! print out the whole list of id #s
                 for (int k = 0; k < numRecords; k++)
                 {
@@ -192,8 +195,14 @@ void bubbleSort()
                     cout << employees[k]->id;
                 }
 
+
+
+
                 //print a new line
                 cout << endl;
+
+
+                
 
             }
 

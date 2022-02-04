@@ -138,6 +138,6 @@ int main(int argc, char** argv)
 
 
     //print done
-    cout << "DONE! Average number of comparisons: " << (total/numQue);
+    cout << "DONE! Average number of comparisons: " << (total/numQue) << endl;
 
 }

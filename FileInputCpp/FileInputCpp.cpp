@@ -13,6 +13,7 @@ using namespace std;
 //global variables
 Employee** employees;
 int comparisons;
+double total = 0;
 
 int binarySearch(int idToFind, int numRecords);
 
@@ -122,6 +123,7 @@ int main(int argc, char** argv)
 
         //for formatting
         cout << endl;
+        cout << "DONE! Average amount of comparisons: " << (total/numQue) << endl;
     }
 
 
@@ -132,10 +134,10 @@ int main(int argc, char** argv)
 int binarySearch(int idToFind, int numRecords)
 {
     //variables
-    double average;
     int low = 0;
     int high = numRecords; 
     int mid;
+
 
     //set comparisons to 0
     comparisons = 0;
@@ -161,6 +163,9 @@ int binarySearch(int idToFind, int numRecords)
         //increase comparisons
         comparisons += 1;
     }
+
+    //increase the total comparisons
+    total += comparisons;
 
 
     //return the index of the employee with the given id number

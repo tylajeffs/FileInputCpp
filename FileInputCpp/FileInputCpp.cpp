@@ -24,6 +24,8 @@ int binarySearch(int idToFind, int numRecords);
 
 void bubbleSort();
 
+void insertionSort();
+
 int main(int argc, char** argv)
 {
 
@@ -212,5 +214,47 @@ void bubbleSort()
 
     //print number of comparisons
     cout << "it took " << comparisons << " comparisons to sort this list" << endl;
+
+}
+
+
+
+
+
+
+
+//insertion sort algorithm
+void insertionSort()
+{
+    //set comparisons to 0
+    comparisons = 0;
+
+    for (int i = 1; i < numRecords; i++)
+    {
+        //set the key
+        Employee* key = employees[i];
+
+        //insert the value where it belongs
+        int j = i - 1;
+
+        //while loop moves everything over so there is space to add the key
+        while (j > 0 && (employees[j]->id > key->id))
+        {
+            //increase comparisons
+            comparisons++;
+
+           
+            employees[j + 1] = employees[j];
+            
+            //decrease j
+            j = j - 1;
+        }
+
+        //insert the employee at the right place
+        employees[j + 1] = key;
+
+    }
+
+
 
 }

@@ -94,7 +94,7 @@ int main(int argc, char** argv)
 
 
     //perform the insertion sort algorithm
-    insertionSort();
+    selectionSort();
 
 
 }
@@ -273,7 +273,7 @@ void selectionSort()
         //set minimum index
         int minIndex = i;
 
-        for (int j = i + 1; i < numRecords; i++)
+        for (int j = i + 1; j < numRecords; j++)
         {
             //increase comparisons
             comparisons++;

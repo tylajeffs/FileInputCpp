@@ -26,6 +26,8 @@ void bubbleSort();
 
 void insertionSort();
 
+void selectionSort();
+
 int main(int argc, char** argv)
 {
 
@@ -251,6 +253,63 @@ void insertionSort()
     }
 
     cout << "it took " << comparisons << " comparisons to sort this list" << endl;
+
+
+
+}
+
+
+
+
+
+void selectionSort()
+{
+
+    //set comparisons to 0
+    comparisons = 0;
+
+    for (int i = 0; i < numRecords - 1; i++)
+    {
+        //set minimum index
+        int minIndex = i;
+
+        for (int j = i + 1; i < numRecords; i++)
+        {
+            //increase comparisons
+            comparisons++;
+
+            //compare employee id's
+            if (employees[j]->id < employees[minIndex]->id)
+            {
+                minIndex = j;
+            }
+        }
+
+        //store employee in temporary variable
+        Employee* temp = employees[minIndex];
+
+        //exchange the employees
+        employees[minIndex] = employees[i];
+        employees[i] = temp;
+
+
+
+
+        //print all of the id numbers SMALL ONLY
+        for (int k = 0; k < numRecords; k++)
+        {
+            cout << employees[k]->id << " ";
+        }
+
+        //formatting
+        cout << endl;
+
+
+    }
+
+    //print comparisons
+    cout << "it took " << comparisons << " comparisons to sort this list" << endl;
+
 
 
 

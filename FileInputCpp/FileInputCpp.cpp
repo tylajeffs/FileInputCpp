@@ -253,7 +253,17 @@ void insertionSort()
         //insert the employee at the right place
         employees[j + 1] = key;
 
+        //print all of the id numbers
+        for (int k = 0; k < numRecords; k++)
+        {
+            cout << employees[k];
+        }
+
+        cout << endl;
+
     }
+
+    cout << "it took " << comparisons << " to sort this list" << endl;
 
 
 

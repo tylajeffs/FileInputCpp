@@ -91,23 +91,9 @@ int main(int argc, char** argv)
     ifs.close();
 
 
-    //perform the bubble sort algorithm
-    bubbleSort();
+    //perform the insertion sort algorithm
+    insertionSort();
 
-
-    //write out the sorted array to an external file
-    ofstream ofs;
-    ofs.open("C:/users/config/desktop/bubbleSorted.txt", ios::out);
-    
-    for (int i = 0; i < numRecords; i++)
-    {
-        //make a method to return a string 
-        ofs << employees[i]->writeInfo() << endl;
-
-    }
-    
-    //close it
-    ofs.close();
 
 }
 
@@ -238,7 +224,7 @@ void insertionSort()
         int j = i - 1;
 
         //while loop moves everything over so there is space to add the key
-        while (j > 0 && (employees[j]->id > key->id))
+        while (j >= 0 && (employees[j]->id > key->id))
         {
             //increase comparisons
             comparisons++;
@@ -253,17 +239,18 @@ void insertionSort()
         //insert the employee at the right place
         employees[j + 1] = key;
 
-        //print all of the id numbers
+        //print all of the id numbers SMALL ONLY
         for (int k = 0; k < numRecords; k++)
         {
-            cout << employees[k];
+            cout << employees[k]->id << " ";
         }
 
+        //formatting
         cout << endl;
 
     }
 
-    cout << "it took " << comparisons << " to sort this list" << endl;
+    cout << "it took " << comparisons << " comparisons to sort this list" << endl;
 
 
 

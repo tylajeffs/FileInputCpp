@@ -28,6 +28,10 @@ void insertionSort();
 
 void selectionSort();
 
+void mergeSort();
+
+void merge();
+
 int main(int argc, char** argv)
 {
 
@@ -325,6 +329,28 @@ void selectionSort()
 
     //print comparisons
     cout << "it took " << comparisons << " comparisons to sort this list" << endl;
+
+
+}
+
+
+
+
+
+
+void mergeSort()
+{
+
+
+
+
+
+}
+
+
+
+void merge()
+{
 
 
 

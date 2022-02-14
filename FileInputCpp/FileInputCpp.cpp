@@ -28,7 +28,9 @@ void insertionSort();
 
 void selectionSort();
 
-void mergeSort();
+
+//p is first index to sort, r is last index
+void mergeSort(int p, int r);
 
 void merge();
 
@@ -338,9 +340,17 @@ void selectionSort()
 
 
 
-void mergeSort()
+void mergeSort(int p, int r)
 {
+    if (p < r)
+    {
+        int q = (p + r) / 2;
 
+        mergeSort(p, q);
+        mergeSort((q + 1), r);
+
+
+    }
 
 
 

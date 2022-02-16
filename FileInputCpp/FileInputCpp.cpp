@@ -32,7 +32,7 @@ void selectionSort();
 //p is first index to sort, r is last index
 void mergeSort(int p, int r);
 
-void merge();
+void merge(int p, int q, int r);
 
 int main(int argc, char** argv)
 {
@@ -339,28 +339,79 @@ void selectionSort()
 
 
 
-
+//merge sort algorithm - takes in the first and last index of the array
 void mergeSort(int p, int r)
 {
     if (p < r)
     {
+        //midpoint between p and r
         int q = (p + r) / 2;
 
         mergeSort(p, q);
         mergeSort((q + 1), r);
+        merge(p, q, r);
 
 
     }
-
-
 
 
 }
 
 
 
-void merge()
+void merge(int p, int q, int r)
 {
+    int counter = 0;
+
+    int num1 = q - p + 1;
+    int num2 = r - q;
+
+    //create new sub arrays of employees
+    Employee** L = new Employee * [num1];
+    Employee** R = new Employee * [num2];
+
+    for (int i = 0; i < num1; i++)
+    {
+        L[i] = employees[p + i];
+    }
+
+    for (int j = 0; j < num2; j++)
+    {
+        R[j] = employees[q + j + 1];
+    }
+
+    L[num1] = new Employee();
+    R[num2] = new Employee();
+
+    int i = 0;
+    int j = 0;
+
+    for (int k = p; k <= r; k++)
+    {
+        counter++;
+
+        if(L[i]->id <= R[j]->id)
+        {
+            employees[k] = L[i];
+            i += 1;
+        }
+        else
+        {
+            employees[k] = R[j];
+            j = j + 1;
+        }
+    }
+
+    //print all of the id numbers SMALL ONLY
+    for (int k = 0; k < numRecords; k++)
+    {
+        cout << employees[k]->id << " ";
+    }
+
+    //formatting
+    cout << endl;
+    
+    cout << "it took " << comparisons << " comparisons to sort this list" << endl;
 
 
 

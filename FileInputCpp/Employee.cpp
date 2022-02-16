@@ -1,5 +1,6 @@
 #include "Employee.h"
 #include <iostream>
+#include <climits>
 
 //constructor
 Employee::Employee(string n, int i, int a, string j, int y)
@@ -9,6 +10,13 @@ Employee::Employee(string n, int i, int a, string j, int y)
 	age = a;
 	job = j;
 	year = y;
+}
+
+
+//default constructor
+Employee::Employee()
+{
+	id = INT_MAX;
 }
 
 

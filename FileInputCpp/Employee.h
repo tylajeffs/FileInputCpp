@@ -18,6 +18,8 @@ public:
 
 	Employee(string, int, int, string, int);
 
+	Employee();
+
 	void printInfo();
 
 	string writeInfo();

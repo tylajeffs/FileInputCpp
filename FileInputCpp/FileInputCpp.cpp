@@ -14,6 +14,8 @@ using namespace std;
 Employee** employees;
 int comparisons;
 int numRecords;
+//set the counter
+int counter = 0;
 
 
 
@@ -99,8 +101,17 @@ int main(int argc, char** argv)
     ifs.close();
 
 
-    //perform the insertion sort algorithm
-    selectionSort();
+
+    
+
+    //perform the merge sort algorithm
+    mergeSort(0,numRecords - 1);
+
+
+    
+
+    //print it out
+    cout << "it took " << counter << " comparisons to sort this list" << endl;
 
 
 
@@ -342,6 +353,7 @@ void selectionSort()
 //merge sort algorithm - takes in the first and last index of the array
 void mergeSort(int p, int r)
 {
+
     if (p < r)
     {
         //midpoint between p and r
@@ -354,14 +366,13 @@ void mergeSort(int p, int r)
 
     }
 
-
+    
 }
 
 
 
 void merge(int p, int q, int r)
 {
-    int counter = 0;
 
     int num1 = q - p + 1;
     int num2 = r - q;
@@ -411,7 +422,7 @@ void merge(int p, int q, int r)
     //formatting
     cout << endl;
     
-    cout << "it took " << comparisons << " comparisons to sort this list" << endl;
+    
 
 
 

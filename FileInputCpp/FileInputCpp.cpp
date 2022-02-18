@@ -131,7 +131,7 @@ int main(int argc, char** argv)
 
     //write out the sorted array to an external file
     ofstream ofs;
-    ofs.open("C:/users/config/desktop/selectionSorted.txt", ios::out);
+    ofs.open("C:/users/config/desktop/heapSorted.txt", ios::out);
 
     for (int i = 0; i < numRecords; i++)
     {

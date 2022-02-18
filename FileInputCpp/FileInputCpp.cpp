@@ -42,6 +42,9 @@ void heapSort();
 void maxHeapify(int i);
 void buildMaxHeap();
 
+int partition(int p, int r);
+void quickSort(int p, int r);
+
 int main(int argc, char** argv)
 {
 
@@ -110,8 +113,8 @@ int main(int argc, char** argv)
 
     
 
-    //perform the heap sort algorithm
-    heapSort();
+    //perform the quick sort algorithm
+    quickSort(0, numRecords-1);
 
 
     //print all of the id numbers SMALL ONLY
@@ -551,5 +554,64 @@ void buildMaxHeap()
         //call max heapify
         maxHeapify(i);
     }
+
+}
+
+
+
+//quicksort algorithm, takes in the first and last index of the array
+void quickSort(int p, int r)
+{
+    if (p < r)
+    {
+        int q = partition(p, r);
+        quickSort(p, q - 1);
+        quickSort(q + 1, r);
+    }
+
+}
+
+
+
+//partition function for quicksort
+int partition(int p, int r)
+{
+    Employee* x = employees[r];
+    int i = p - 1;
+
+    //loop through everything
+    for (int j = p; j < r - 1; j++)
+    {
+        //increment counter
+        counter++;
+
+        //compare employee id's
+        if (employees[j]->id <= x->id)
+        {
+            i++;
+            swap(employees[i], employees[j]);
+        }
+    }
+
+    //exchange employees
+    swap(employees[i + 1], employees[r]);
+
+
+
+
+
+    //print all of the id numbers SMALL ONLY
+    for (int k = 0; k < numRecords; k++)
+    {
+        cout << employees[k]->id << " ";
+    }
+
+    //formatting
+    cout << endl;
+
+
+
+    //return
+    return i + 1;
 
 }

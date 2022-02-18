@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include "Employee.h"
+#include<cstdlib>
 
 using namespace std;
 
@@ -32,18 +33,26 @@ void insertionSort();
 
 void selectionSort();
 
-
+//merge sort functions
 //p is first index to sort, r is last index
 void mergeSort(int p, int r);
-
 void merge(int p, int q, int r);
 
+//heap sort functions
 void heapSort();
 void maxHeapify(int i);
 void buildMaxHeap();
 
+//quick sort functions
 int partition(int p, int r);
 void quickSort(int p, int r);
+
+//randomized quick sort functions
+int random(int min, int max);
+void randomizedQuickSort(int p, int r);
+int randomizedPartition(int p, int r);
+
+
 
 int main(int argc, char** argv)
 {
@@ -114,7 +123,7 @@ int main(int argc, char** argv)
     
 
     //perform the quick sort algorithm
-    quickSort(0, numRecords-1);
+    randomizedQuickSort(0, numRecords-1);
 
 
     //print all of the id numbers SMALL ONLY
@@ -134,7 +143,7 @@ int main(int argc, char** argv)
 
     //write out the sorted array to an external file
     ofstream ofs;
-    ofs.open("C:/users/config/desktop/heapSorted.txt", ios::out);
+    ofs.open("C:/users/config/desktop/quickSorted.txt", ios::out);
 
     for (int i = 0; i < numRecords; i++)
     {
@@ -580,7 +589,7 @@ int partition(int p, int r)
     int i = p - 1;
 
     //loop through everything
-    for (int j = p; j < r - 1; j++)
+    for (int j = p; j < r ; j++)
     {
         //increment counter
         counter++;
@@ -590,6 +599,17 @@ int partition(int p, int r)
         {
             i++;
             swap(employees[i], employees[j]);
+
+
+
+            //print all of the id numbers SMALL ONLY
+            for (int k = 0; k < numRecords; k++)
+            {
+                cout << employees[k]->id << " ";
+            }
+
+            //formatting
+            cout << endl;
         }
     }
 
@@ -614,4 +634,49 @@ int partition(int p, int r)
     //return
     return i + 1;
 
+}
+
+
+//randomized quick sort algorithm
+void randomizedQuickSort(int p, int r)
+{
+    //check if p is less than r
+    if (p < r)
+    {
+        //call the randomized partition and recursively call self
+        int q = randomizedPartition(p, r);
+        randomizedQuickSort(p, q - 1);
+        randomizedQuickSort(q + 1, r);
+    }
+}
+
+
+//randomized quick sort partition function
+int randomizedPartition(int p, int r)
+{
+    int i = random(p, r);
+
+    //exchange the employees
+    swap(employees[r], employees[i]);
+
+    return partition(p, r);
+}
+
+
+
+int random(int min, int max) 
+{
+
+    // Providing a seed value
+    srand((unsigned)time(NULL));
+
+    //find the range
+    int range = max - min;
+
+    // Retrieve a random number between min and max
+    int ran = min + (rand() % range);
+
+
+
+    return  (int)ran;
 }

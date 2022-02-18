@@ -14,8 +14,10 @@ using namespace std;
 Employee** employees;
 int comparisons;
 int numRecords;
+int heapSize;
 //set the counter
 int counter = 0;
+
 
 
 
@@ -35,6 +37,10 @@ void selectionSort();
 void mergeSort(int p, int r);
 
 void merge(int p, int q, int r);
+
+void heapSort();
+void maxHeapify(int i);
+void buildMaxHeap();
 
 int main(int argc, char** argv)
 {
@@ -104,11 +110,18 @@ int main(int argc, char** argv)
 
     
 
-    //perform the merge sort algorithm
-    mergeSort(0,numRecords - 1);
+    //perform the heap sort algorithm
+    heapSort();
 
 
-    
+    //print all of the id numbers SMALL ONLY
+    for (int k = 0; k < numRecords; k++)
+    {
+        cout << employees[k]->id << " ";
+    }
+
+    //formatting
+    cout << endl;
 
     //print it out
     cout << "it took " << counter << " comparisons to sort this list" << endl;
@@ -426,5 +439,117 @@ void merge(int p, int q, int r)
 
 
 
+
+}
+
+
+
+
+
+void heapSort()
+{
+    //print all of the id numbers SMALL ONLY
+    for (int k = 0; k < numRecords; k++)
+    {
+        cout << employees[k]->id << " ";
+    }
+
+    //formatting
+    cout << endl;
+
+
+
+
+    //call build max heap
+    buildMaxHeap();
+
+    for (int i = numRecords - 1; i >= 1; i--)
+    {
+
+        //print all of the id numbers SMALL ONLY
+        for (int k = 0; k < numRecords; k++)
+        {
+            cout << employees[k]->id << " ";
+        }
+
+        //formatting
+        cout << endl;
+
+
+
+        //exchange the employees
+        Employee* temp = employees[i];
+        employees[i] = employees[0];
+        employees[0] = temp;
+
+        //decrease the heap size
+        heapSize--;
+
+        //call max heapify passing in the first index of the array (0)
+        maxHeapify(0);
+
+    }
+
+
+
+}
+
+
+
+void maxHeapify(int i)
+{
+
+    //find the indexes of the left and right of the array
+    int l = (2*i) + 1;
+    int r = 2 * (i + 1);
+    int largest;
+
+    //increase the counter
+    counter++;
+
+    //check to see if the id numbers are different
+    if (l <= heapSize && employees[l]->id > employees[i]->id)
+    {
+        largest = l;
+    }
+    else
+    {
+        largest = i;
+    }
+
+    //increase counter again
+    counter++;
+
+    //comparisons
+    if (r <= heapSize && employees[r]->id > employees[largest]->id)
+    {
+        largest = r;
+    }
+    if (largest != i)
+    {
+        //exchange the employees
+        Employee* temp = employees[i];
+        employees[i] = employees[largest];
+        employees[largest] = temp;
+
+        //recursive call to max heapify
+        maxHeapify(largest);
+
+
+    }
+
+}
+
+
+void buildMaxHeap()
+{
+    //set heap size
+    heapSize = numRecords -1;
+
+    for (int i = numRecords/2; i >= 0; i--)
+    {
+        //call max heapify
+        maxHeapify(i);
+    }
 
 }

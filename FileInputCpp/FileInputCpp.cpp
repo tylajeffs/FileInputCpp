@@ -52,6 +52,9 @@ int random(int min, int max);
 void randomizedQuickSort(int p, int r);
 int randomizedPartition(int p, int r);
 
+//tail recursion quick sort funtions
+void tailRecursiveQuickSort(int p, int r);
+
 
 
 int main(int argc, char** argv)
@@ -123,7 +126,7 @@ int main(int argc, char** argv)
     
 
     //perform the quick sort algorithm
-    randomizedQuickSort(0, numRecords-1);
+    quickSort(0, numRecords-1);
 
 
     //print all of the id numbers SMALL ONLY
@@ -679,4 +682,21 @@ int random(int min, int max)
 
 
     return  (int)ran;
+}
+
+
+
+
+//tail recursive quick sort algorithm
+void tailRecursiveQuickSort(int p, int r)
+{
+    //while loop replaces some recursion
+    while (p < r)
+    {
+        //partition and sort left subarray
+        int q = partition(p, r);
+        tailRecursiveQuickSort(p, q - 1);
+        p = q + 1;
+    }
+
 }

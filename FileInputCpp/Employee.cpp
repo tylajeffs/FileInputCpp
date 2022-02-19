@@ -17,6 +17,8 @@ Employee::Employee(string n, int i, int a, string j, int y)
 Employee::Employee()
 {
 	id = INT_MAX;
+	age = 40;
+
 }
 
 

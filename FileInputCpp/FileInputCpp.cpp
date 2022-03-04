@@ -164,7 +164,7 @@ int main(int argc, char** argv)
     
 
     //perform the hash division algorithm
-    hashPartThree();
+    hashDivision();
 
     
     //print number of collisions
@@ -187,9 +187,20 @@ void hashPartThree()
     //go through each employee in the list
     for (int i = 0; i < numRecords; i++)
     {
+        //set the asci
+        int asci = 0;
+
+        //get the ASCII for each character in the name and add them together
+        for (int j = 0; j < employees[i]->name.length(); j++)
+        {
+            char a = (char)employees[i]->name.at(j);
+            asci += (int)a;
+        }
+
+
 
         //get the key
-        int key = employees[i]->id;
+        int key = asci;
 
         //find the hashed index
         int hashedIndex = key % arraySize;

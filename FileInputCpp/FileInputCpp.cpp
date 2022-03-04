@@ -96,8 +96,9 @@ int main(int argc, char** argv)
     numRecords = stoi(secondline);
  
 
-    //create hashtable of employees
-    employeeHash = new Employee * [arraySize];
+    //create hashtable of employees 
+    vector <int> employeeHash[arraySize];
+  
 
 
 
@@ -196,7 +197,7 @@ void hashDivision()
         cout << "Attempting to hash " << employees[i]->name << " at index " << hashed << "...  ";
 
         //check if the index is empty
-        if (employeeHash[hashed] == NULL)
+        if (employeeHash[hashed].size() == 0)
         {
             //print out that it is empty
             cout << "SUCCESS!";

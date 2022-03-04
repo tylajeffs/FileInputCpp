@@ -19,7 +19,8 @@ int heapSize;
 //set the counter
 int counter = 0;
 int arraySize;
-Employee** employeeHash;
+vector<vector<Employee*>> employeeHash(arraySize);
+
 int collisions = 0;
 
 
@@ -97,8 +98,31 @@ int main(int argc, char** argv)
  
 
     //create hashtable of employees 
-    vector <int> employeeHash[arraySize];
+    //vector <int> employeeHash[arraySize];
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -191,35 +215,35 @@ void hashDivision()
        //get the key
         int key = employees[i]->id;
 
+        //find the hashed index
         int hashed = key % arraySize;
 
 
         cout << "Attempting to hash " << employees[i]->name << " at index " << hashed << "...  ";
 
         //check if the index is empty
-        if (employeeHash[hashed].size() == 0)
+        if (employeeHash[hashed].empty() == true)
         {
             //print out that it is empty
             cout << "SUCCESS!";
-            
-            //add the employee to the hashtable
-            employeeHash[hashed] = employees[i];
+  
         }
         else
         {
             // index is full
-            cout << "OOPS! Collision with " << employeeHash[hashed]->name;
+            cout << "OOPS! Collision with " << employees[hashed]->name;
             
 
-            //add the employee to the hashtable
-            employeeHash[hashed] = employees[i];
+            
 
             //increase collisions
             collisions++;
         }
 
 
-        employeeHash[hashed] = employees[i];
+        //add the employee to the hashtable
+        employeeHash[hashed].push_back(employees[i]);
+
 
 
     }

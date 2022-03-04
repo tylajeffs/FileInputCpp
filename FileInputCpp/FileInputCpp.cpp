@@ -18,6 +18,9 @@ int numRecords;
 int heapSize;
 //set the counter
 int counter = 0;
+int arraySize;
+Employee** employeeHash;
+int collisions = 0;
 
 
 
@@ -55,6 +58,9 @@ int randomizedPartition(int p, int r);
 //tail recursion quick sort funtions
 void tailRecursiveQuickSort(int p, int r);
 
+//hashtable algorithms
+void hashDivision();
+
 
 
 int main(int argc, char** argv)
@@ -74,18 +80,24 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    //get and store the first line of the file (number of records in the file)
+    //get and store the first line of the file (array size)
     string firstline;
     getline(ifs, firstline);
 
     //convert to int
-    numRecords = stoi(firstline);
+    arraySize = stoi(firstline); //m
 
 
+    //get and store the second line of the file (number of records in the file)
+    string secondline;
+    getline(ifs, secondline);  //n
 
+    //convert to int
+    numRecords = stoi(secondline);
  
 
-
+    //create hashtable of employees
+    employeeHash = new Employee * [arraySize];
 
 
 
@@ -125,8 +137,13 @@ int main(int argc, char** argv)
 
     
 
-    //perform the quick sort algorithm
-    quickSort(0, numRecords-1);
+    //perform the hash division algorithm
+    hashDivision();
+
+
+    //print number of collisions
+    cout << "There were " << collisions << " collisions.";
+
 
 
     //print all of the id numbers SMALL ONLY
@@ -159,6 +176,55 @@ int main(int argc, char** argv)
     ofs.close();
 
 }
+
+
+
+
+//hashtable algorithm
+void hashDivision()
+{
+
+    //go through each employee in the list
+    for (int i = 0; i < numRecords; i++)
+    {
+       //get the key
+        int key = employees[i]->id;
+
+        int hashed = key % arraySize;
+
+
+        cout << "Attempting to hash " << employees[i]->name << " at index " << hashed << "...  ";
+
+        //check if the index is empty
+        if (employeeHash[hashed] == NULL)
+        {
+            //print out that it is empty
+            cout << "SUCCESS!";
+            
+            //add the employee to the hashtable
+            employeeHash[hashed] = employees[i];
+        }
+        else
+        {
+            // index is full
+            cout << "OOPS! Collision with " << employeeHash[hashed]->name;
+            
+
+            //add the employee to the hashtable
+            employeeHash[hashed] = employees[i];
+
+            //increase collisions
+            collisions++;
+        }
+
+
+        employeeHash[hashed] = employees[i];
+
+
+    }
+
+}
+
 
 
 

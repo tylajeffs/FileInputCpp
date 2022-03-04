@@ -19,7 +19,7 @@ int heapSize;
 //set the counter
 int counter = 0;
 int arraySize;
-vector<vector<Employee*>> employeeHash(arraySize);
+
 
 int collisions = 0;
 
@@ -61,6 +61,8 @@ void tailRecursiveQuickSort(int p, int r);
 
 //hashtable algorithms
 void hashDivision();
+void hashMultiplication();
+void hashPartThree();
 
 
 
@@ -97,8 +99,7 @@ int main(int argc, char** argv)
     numRecords = stoi(secondline);
  
 
-    //create hashtable of employees 
-    //vector <int> employeeHash[arraySize];
+
   
 
 
@@ -163,78 +164,162 @@ int main(int argc, char** argv)
     
 
     //perform the hash division algorithm
-    hashDivision();
+    hashPartThree();
 
-
+    
     //print number of collisions
-    cout << "There were " << collisions << " collisions.";
-
-
-
-    //print all of the id numbers SMALL ONLY
-    for (int k = 0; k < numRecords; k++)
-    {
-        cout << employees[k]->id << " ";
-    }
-
-    //formatting
-    cout << endl;
-
-    //print it out
-    cout << "it took " << counter << " comparisons to sort this list" << endl;
-
-
-
-
-    //write out the sorted array to an external file
-    ofstream ofs;
-    ofs.open("C:/users/config/desktop/quickSorted.txt", ios::out);
-
-    for (int i = 0; i < numRecords; i++)
-    {
-        //make a method to return a string 
-        ofs << employees[i]->writeInfo() << endl;
-
-    }
-
-    //close it
-    ofs.close();
+    cout << "\nThere were " << collisions << " collisions." <<endl;
 
 }
 
 
 
 
-//hashtable algorithm
-void hashDivision()
+
+
+//hashtable division algorithm
+void hashPartThree()
 {
+    //create vector of vectors
+    vector<vector<Employee*>> employeeHash(arraySize);
+
 
     //go through each employee in the list
     for (int i = 0; i < numRecords; i++)
     {
-       //get the key
+
+        //get the key
         int key = employees[i]->id;
 
         //find the hashed index
-        int hashed = key % arraySize;
+        int hashedIndex = key % arraySize;
 
-
-        cout << "Attempting to hash " << employees[i]->name << " at index " << hashed << "...  ";
+        
 
         //check if the index is empty
-        if (employeeHash[hashed].empty() == true)
+        if (employeeHash[hashedIndex].empty() == false)
+        {
+
+            //increase collisions
+            collisions++;
+
+        }
+
+        //find how many collisions were on one line
+        int lineCollisions = employeeHash[i].size();
+
+        //print what trying to hash
+        cout << "Adding " << employees[i]->name << " at index " << hashedIndex << " (" << lineCollisions << " collisions)" << endl;
+
+
+        //add the employee to the hashtable
+        employeeHash[hashedIndex].push_back(employees[i]);
+
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+//hashtable multiplication algorithm
+void hashMultiplication()
+{
+    //create the vector of vectors
+    vector<vector<Employee*>> employeeHash(arraySize);
+
+    //value of A
+    double A = (sqrt(5) - 1) / 2;
+    
+    
+
+
+    //go through each employee in the list
+    for (int i = 0; i < numRecords; i++)
+    {
+
+        //find the hashed index
+        double fullNum = A * employees[i]->id;
+        double intPortion = (int)fullNum;
+        double decimals = fullNum - intPortion;
+        double key = arraySize * decimals;
+
+        int hashedIndex = (int)key;
+
+
+
+        //print what you are trying to hash
+        cout << "Attempting to hash " << employees[i]->name << " at index " << hashedIndex << "...  ";
+
+        //check if the index is empty
+        if (employeeHash[hashedIndex].empty() == true)
         {
             //print out that it is empty
-            cout << "SUCCESS!";
+            cout << "SUCCESS!\n";
   
         }
         else
         {
             // index is full
-            cout << "OOPS! Collision with " << employees[hashed]->name;
-            
+            cout << "OOPS! Collision with " << employees[hashedIndex]->name <<endl;     
 
-            
+            //increase collisions
+            collisions++;
+        }
+
+        //add the employee to the hashtable
+        employeeHash[hashedIndex].push_back(employees[i]);
+
+    }
+
+}
+
+
+
+
+
+//hashtable division algorithm
+void hashDivision()
+{
+    //create vector of vectors
+    vector<vector<Employee*>> employeeHash(arraySize);
+
+
+    //go through each employee in the list
+    for (int i = 0; i < numRecords; i++)
+    {
+        //get the key
+        int key = employees[i]->id;
+
+        //find the hashed index
+        int hashedIndex = key % arraySize;
+
+        //print what trying to hash
+        cout << "Attempting to hash " << employees[i]->name << " at index " << hashedIndex << "...  ";
+
+        //check if the index is empty
+        if (employeeHash[hashedIndex].empty() == true)
+        {
+            //print out that it is empty
+            cout << "SUCCESS!\n";
+
+        }
+        else
+        {
+            // index is full
+            cout << "OOPS! Collision with " << employees[hashedIndex]->name << endl;
+
+
+
 
             //increase collisions
             collisions++;
@@ -242,15 +327,13 @@ void hashDivision()
 
 
         //add the employee to the hashtable
-        employeeHash[hashed].push_back(employees[i]);
+        employeeHash[hashedIndex].push_back(employees[i]);
 
 
 
     }
 
 }
-
-
 
 
 

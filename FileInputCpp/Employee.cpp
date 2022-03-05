@@ -28,6 +28,7 @@ void Employee::printInfo()
 	cout << "Name: " << name << ", ";
 	cout << "ID: " << id << ", ";
 	cout << "Age: " << age << ", ";
+	cout << "Job: " << job << ", ";
 	cout << "Hired: " << year << endl;
 
 
@@ -36,5 +37,5 @@ void Employee::printInfo()
 
 string Employee::writeInfo()
 {
-	return (name + "|" + to_string(id) + "|" + to_string(age) + "|" + to_string(year));
+	return (name + "|" + to_string(id) + "|" + to_string(age) + "|" + job + "|" + to_string(year));
 }

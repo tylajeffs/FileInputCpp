@@ -19,7 +19,11 @@ int heapSize;
 //set the counter
 int counter = 0;
 int arraySize;
-
+int lookUpCollisions = 0;
+int numQ;
+vector<string> queries;
+//create vector of vectors
+//vector<vector<Employee*>> employeeHash;
 
 int collisions = 0;
 
@@ -62,7 +66,8 @@ void tailRecursiveQuickSort(int p, int r);
 //hashtable algorithms
 void hashDivision();
 void hashMultiplication();
-void hashPartThree();
+void hashPartThree(vector<vector<Employee*>> &empHash);
+void hashQuery(vector<vector<Employee*>> &empHash);
 
 
 
@@ -156,32 +161,156 @@ int main(int argc, char** argv)
     }
 
 
+
+    //get the line of *** (trash)
+    string trash;
+    getline(ifs, trash);
+
+
+    //read the line of how many queries
+    string numQu;
+    getline(ifs, numQu);
+
+    //convert to int
+    numQ = stoi(numQu); //m
+
+
+
+    //loop through and read in all of the queries, storing in a vector
+    for (int i = 0; i < numQ; i++)
+    {
+        //read the line
+        string l;
+        getline(ifs, l);
+
+        //store in vector
+        queries.push_back(l);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     //close the scanner thingy
     ifs.close();
 
 
 
+
+    //create vector of vectors
+    vector<vector<Employee*>> employeeHash(arraySize);
+
     
 
     //perform the hash division algorithm
-    hashDivision();
+    hashPartThree(employeeHash);
+
+
+   
+
+
+    hashQuery(employeeHash);
+
+
+
 
     
     //print number of collisions
-    cout << "\nThere were " << collisions << " collisions." <<endl;
+    cout << "\nTotal collisions during lookup phase: " << lookUpCollisions <<endl;
 
 }
 
 
 
 
+//hashtable query
+void hashQuery(vector<vector<Employee*>> &empHash)
+{
+
+    //go through each employee in the query
+    for (int i = 0; i < numQ; i++)
+    {
+        //set the asci
+        int asci = 0;
+
+        //get the ASCII for each character in the name and add them together
+        for (int j = 0; j < queries[i].length(); j++)
+        {
+            char a = (char)queries[i].at(j);
+            asci += (int)a;
+        }
+
+
+        //get the key
+        int key = asci;
+
+        //find the hashed index (row #)
+        int hashedIndex = key % arraySize;
+
+        //varibale to hold the inner vector index (initialize to 0)
+        int innerIndex = 0;
+        
+
+
+        // check if the index is empty
+        if (!empHash[hashedIndex].empty())
+        {
+           
+
+
+            //loop through the inner vector to find the correct employee name
+            
+            for (int j = 0; j < empHash[hashedIndex].size(); j++)
+            {
+               
+
+                //check if the names are the same
+                if (empHash[hashedIndex][0]->name.compare(queries[i]) == 0)
+                {
+                    innerIndex = j;
+                    //increase total number of collisions
+                    lookUpCollisions++;
+                }
+
+                
+            }
+            
+
+        }
+
+
+        //find how many collisions were on one line
+        int lineCollisions = empHash[hashedIndex].size();
+
+        
+
+       
+
+        //print what trying to hash
+        cout << "FOUND: " << queries[i] << " after " << innerIndex << " collisions at index " << hashedIndex << " in the hashtable. " << endl;
+
+        cout << "COMPLETE RECORD: " << empHash[hashedIndex][innerIndex]->writeInfo() << endl << endl;
+        
+
+    }
+
+}
+
+
 
 
 //hashtable division algorithm
-void hashPartThree()
+void hashPartThree(vector<vector<Employee*>> &empHash)
 {
-    //create vector of vectors
-    vector<vector<Employee*>> employeeHash(arraySize);
+    
 
 
     //go through each employee in the list
@@ -206,29 +335,34 @@ void hashPartThree()
         int hashedIndex = key % arraySize;
 
         
-
+        /*
         //check if the index is empty
-        if (employeeHash[hashedIndex].empty() == false)
+        if (empHash[hashedIndex].empty() == false)
         {
 
             //increase collisions
             collisions++;
 
         }
+        */
 
         //find how many collisions were on one line
-        int lineCollisions = employeeHash[i].size();
+        int lineCollisions = empHash[i].size();
 
         //print what trying to hash
         cout << "Adding " << employees[i]->name << " at index " << hashedIndex << " (" << lineCollisions << " collisions)" << endl;
 
 
         //add the employee to the hashtable
-        employeeHash[hashedIndex].push_back(employees[i]);
+        empHash[hashedIndex].push_back(employees[i]);
 
 
+        
+        
 
     }
+
+
 
 }
 

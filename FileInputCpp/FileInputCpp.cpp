@@ -192,13 +192,6 @@ int main(int argc, char** argv)
 
 
 
-
-
-
-
-
-
-
     //close the scanner thingy
     ifs.close();
 
@@ -220,9 +213,6 @@ int main(int argc, char** argv)
     hashQuery(employeeHash);
 
 
-
-
-    
     //print number of collisions
     cout << "\nTotal collisions during lookup phase: " << lookUpCollisions <<endl;
 

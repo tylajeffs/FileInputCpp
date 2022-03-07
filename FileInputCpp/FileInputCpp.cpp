@@ -5,31 +5,22 @@
 #include <vector>
 #include <fstream>
 #include <string>
-#include "Employee.h"
-#include<cstdlib>
+#include <cstdlib>
+#include "Node.h"
 
 using namespace std;
 
 
 //global variables
 vector<string> lines;
-
-
-
-
-Employee** employees;
-int comparisons;
 int numLines;
-int heapSize;
-//set the counter
-int counter = 0;
-int arraySize;
-int lookUpCollisions = 0;
-int numQ;
-vector<string> queries;
+Node* root = NULL;
 
 
 
+//methods
+void insertNode(Node* n);
+void preOrder(Node* n);
 
 
 int main(int argc, char** argv)
@@ -56,10 +47,6 @@ int main(int argc, char** argv)
     //convert to int
     numLines = stoi(firstline);
 
-    
-
-
-    
 
 
 
@@ -70,13 +57,33 @@ int main(int argc, char** argv)
         string trash;
         getline(ifs, trash);
 
-        //convert to int
+        //add to the vector
         lines.push_back(trash);
     }
 
 
     //close the scanner thingy
     ifs.close();
+
+
+
+
+    //start going through the instructions
+    for (string line : lines)
+    {
+        //check to see what instructions the line contains
+        if (line.contains("ADD"))
+        {
+
+        }
+    }
+
+
+
+
+
+
+
 
 
 
@@ -91,12 +98,63 @@ int main(int argc, char** argv)
 
 
     //print number of collisions
-    cout << "\nTotal collisions during lookup phase: " << lookUpCollisions <<endl;
+    cout << "\nTotal collisions during lookup phase: ";
 
 }
 
 
 
+//method to add node to the binary search tree
+void insertNode(Node* n)
+{
+    //nodes
+    Node* y = NULL;
+    Node* x = root;
+
+    //check if x has anything in it
+    while (x != NULL)
+    {
+        //set y equal to x
+        y = x;
+
+        //check the keys
+        if (n->key < x->key)
+        {
+            //move down to the left
+            x = x->left;
+        }
+        else
+        {
+            //move down to the right
+            x = x->right;
+        }
+
+    }
+
+
+    if (y == NULL)
+    {
+        //tree is empty, use node as the root
+        root = n;
+    }
+    else if (n->key < y->key)
+    {
+        //put the node on the left
+        y->left = n;
+
+    }
+    else
+    {
+        //put the node on the right
+        y->right = n;
+    }
+}
+
+
+
+
+
+//preorder traversal of binary tree
 void preOrder(Node* n)
 {
     if()

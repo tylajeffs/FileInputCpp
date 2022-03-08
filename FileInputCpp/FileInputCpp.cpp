@@ -23,7 +23,7 @@ void insertNode(Node* n);
 void preOrder(Node* n);
 void inOrder(Node* n);
 void postOrder(Node* n);
-void iterativeTreeSearch(Node* n);
+void iterativeTreeSearch(int k);
 
 
 int main(int argc, char** argv)
@@ -280,7 +280,7 @@ void iterativeTreeSearch(int k)
     int kk = x->key;
 
     //go through the tree
-    while (x != NULL && k != kk)
+    while (x != NULL && k != x->key)
     {
         //check stuff
         if (kk < x->key)
@@ -301,6 +301,6 @@ void iterativeTreeSearch(int k)
     }
     else
     {
-        cout << "   :   not found"
+        cout << "   :   not found";
     }
 }

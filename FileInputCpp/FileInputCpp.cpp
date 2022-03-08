@@ -24,6 +24,7 @@ void preOrder(Node* n);
 void inOrder(Node* n);
 void postOrder(Node* n);
 void iterativeTreeSearch(int k);
+Node* recursiveTreeSearch(Node* x, int k);
 
 
 int main(int argc, char** argv)
@@ -102,10 +103,11 @@ int main(int argc, char** argv)
 
 
             //print what we are looking for
-            cout << "Looking for: 10   ---   ";
+            cout << "Looking for: " << key << "   --- ";
 
 
-            iterativeTreeSearch(key);
+            //iterativeTreeSearch(key);
+            recursiveTreeSearch(root,key);
 
             //formatting
             cout << endl;
@@ -221,7 +223,7 @@ void preOrder(Node* n)
 {
     if (n != NULL)
     {
-        cout << n->key;
+        cout << n->key << " ";
 
         //recursive call on children (LEFT FIRST)
         preOrder(n->left);
@@ -241,7 +243,7 @@ void inOrder(Node* n)
         //recursive call on left child
         inOrder(n->left);
 
-        cout << n->key;
+        cout << n->key << " ";
 
         //recursive call on right child
         inOrder(n->right);
@@ -262,13 +264,69 @@ void postOrder(Node* n)
         postOrder(n->left);
         postOrder(n->right);
 
-        cout << n->key;
+        cout << n->key << " ";
 
 
     }
 
 
 }
+
+
+
+//recursive search function
+Node* recursiveTreeSearch(Node* x, int k)
+{
+    //x is the current node (starts with root)
+    //k is the key we are searching for
+
+    if (x == NULL || k == x->key)
+    {
+
+        //see if x is null
+        if (x == NULL)
+        {
+            //not found
+            cout << "   : not found";
+        }
+        else
+        {
+            //found it
+            cout << x-> key << "   : found";
+        }
+
+
+
+        return x;
+    }
+    else if (k < x->key)
+    {
+        //print current node
+        cout << x->key << " ";
+
+        return recursiveTreeSearch(x->left, k);
+
+    }
+    else
+    {
+        //print current node
+        cout << x->key << " ";
+
+        return recursiveTreeSearch(x->right, k);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -282,20 +340,23 @@ void iterativeTreeSearch(int k)
     //go through the tree
     while (x != NULL && k != x->key)
     {
+        
+
         //check stuff
         if (kk < x->key)
         {
+            cout << x->key << " ";
             x = x->left;
         }
         else
         {
+            cout << x->key << " ";
             x = x->right;
         }
 
-        cout << x->key;
     }
 
-    if (x->key == k)
+    if (x != NULL && x->key == k)
     {
         cout << "   :   found";
     }

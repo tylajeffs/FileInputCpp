@@ -21,6 +21,9 @@ Node* root = NULL;
 //methods
 void insertNode(Node* n);
 void preOrder(Node* n);
+void inOrder(Node* n);
+void postOrder(Node* n);
+void iterativeTreeSearch(Node* n);
 
 
 int main(int argc, char** argv)
@@ -72,33 +75,92 @@ int main(int argc, char** argv)
     for (string line : lines)
     {
         //check to see what instructions the line contains
-        if (line.contains("ADD"))
+        if (line.find("ADD") != -1)
         {
+            //get the key from the string
+            int pos = line.find(" ");
+
+            int key = stoi(line.substr(pos + 1));
+
+            //create a new node
+            Node* n = new Node(key);
+
+
+            //print what we are trying to add
+            cout << "Adding " << key << endl;
+
+            //add the node to the binary tree
+            insertNode(n);
+        }
+        else if(line.find("FIND") != -1)
+        {
+            //get the key from the string
+            int pos = line.find(" ");
+
+            int key = stoi(line.substr(pos + 1));
+
+
+
+            //print what we are looking for
+            cout << "Looking for: 10   ---   ";
+
+
+            iterativeTreeSearch(key);
+
+            //formatting
+            cout << endl;
 
         }
+        else if(line.find("CLEAR") != -1)
+        {
+            //clear the entire tree
+            root = NULL;
+
+            //print that the tree is deleted
+            cout << "(tree deleted!)" << endl;
+
+            //TO DO delete all nodes??
+
+
+
+        }
+        else if(line.find("PREORDER") != -1)
+        {
+            //print 
+            cout << "PREORDER: ";
+
+            //call preorder function using root
+            preOrder(root);
+
+            //formatting
+            cout << endl;
+        }
+        else if(line.find("INORDER") != -1)
+        {
+            //print 
+            cout << "INORDER: ";
+
+            //call in order function using root
+            inOrder(root);
+
+            //formatting
+            cout << endl;
+        }
+        else  //call post order function
+        {
+            //print 
+            cout << "POSTORDER: ";
+
+            //call the post order fuction using root
+            postOrder(root);
+
+            //formatting
+            cout << endl;
+        }
+
     }
 
 
-
-
-
-
-
-
-
-
-    
-
-    //perform the hash division algorithm
-    hashPartThree(employeeHash);
-
-
-   
-
-
-
-    //print number of collisions
-    cout << "\nTotal collisions during lookup phase: ";
 
 }
 
@@ -157,5 +219,88 @@ void insertNode(Node* n)
 //preorder traversal of binary tree
 void preOrder(Node* n)
 {
-    if()
+    if (n != NULL)
+    {
+        cout << n->key;
+
+        //recursive call on children (LEFT FIRST)
+        preOrder(n->left);
+        preOrder(n->right);
+
+    }
+}
+
+
+
+
+//in order traversal of binary tree
+void inOrder(Node* n)
+{
+    if (n != NULL)
+    {
+        //recursive call on left child
+        inOrder(n->left);
+
+        cout << n->key;
+
+        //recursive call on right child
+        inOrder(n->right);
+
+    }
+
+}
+
+
+
+
+//post order traversal of binary tree
+void postOrder(Node* n)
+{
+    if (n != NULL)
+    {
+        //recursive call on children (LEFT FIRST)
+        postOrder(n->left);
+        postOrder(n->right);
+
+        cout << n->key;
+
+
+    }
+
+
+}
+
+
+
+// iterative search function
+void iterativeTreeSearch(int k)
+{
+    //variables
+    Node* x = root;
+    int kk = x->key;
+
+    //go through the tree
+    while (x != NULL && k != kk)
+    {
+        //check stuff
+        if (kk < x->key)
+        {
+            x = x->left;
+        }
+        else
+        {
+            x = x->right;
+        }
+
+        cout << x->key;
+    }
+
+    if (x->key == k)
+    {
+        cout << "   :   found";
+    }
+    else
+    {
+        cout << "   :   not found"
+    }
 }
